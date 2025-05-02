@@ -3,10 +3,11 @@ use speedy2d::Graphics2D;
 use speedy2d::color::Color;
 
 use crate::shapes::Rectangle;
+use crate::transformations::*;
 
 
-pub fn draw_rectangle(rect: Rectangle, g: &mut Graphics2D) {
-    let points = rect.points;
+pub fn draw_rectangle(rect: &Rectangle, g: &mut Graphics2D) {
+    let points = proj_2d(rect);
     for i in 0..points.len() / 2 {
     let p_2d = (points[i].x, points[i].y);
     let p_2d_next;

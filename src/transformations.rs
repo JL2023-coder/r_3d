@@ -2,16 +2,19 @@ use nalgebra::{matrix, Const, OPoint, Point3, Vector3, point};
 
 use crate::shapes::Rectangle;
 /// 3d to 2d projection
-pub fn proj_2d(rect: &mut Rectangle) {
+pub fn proj_2d(rect: &Rectangle) -> [OPoint<f32, Const<3>>; 8] {
+    let mut points= rect.points;
     let proj_2d = matrix![
         1.0, 0.0, 0.0;
         0.0, 1.0, 0.0;
         0.0, 0.0, 0.0
     ];
 
-    for p in rect.points.iter_mut() {
+    for p in points.iter_mut() {
         *p = proj_2d * *p;
     }
+    
+    points
 }
 
 /// --------------- Rotation methods ------------------
