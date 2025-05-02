@@ -1,0 +1,8 @@
+[package]
+name = "r_3d"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+nalgebra = "0.33.2"
+speedy2d = "2.1.0"
