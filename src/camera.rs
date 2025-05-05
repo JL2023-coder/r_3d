@@ -21,10 +21,6 @@ impl Camera {
         target_position: OPoint<f32, Const<3>>, 
         up_direction: Vector3<f32>
     ) -> Camera {
-        let eye_positon = eye_position;
-        let target_position = target_position;
-        let up_direction = up_direction;
-
         return Camera {
             eye_position,
             target_position,
@@ -46,10 +42,9 @@ impl Camera {
         ];
 
         // Current target_position
-        // Convert to vector for multiplication, using coords
         let curr_target_vector = self.target_position.coords;
-        // Normalize so vector length is 1
-        let rotated_target_vector = (proj_y * curr_target_vector).normalize();
+        // Rotate the vector
+        let rotated_target_vector = proj_y * curr_target_vector;
         self.target_position = OPoint::from(rotated_target_vector);
     }
 }

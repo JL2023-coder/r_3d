@@ -21,25 +21,24 @@ pub struct MyWindowHandler {
 
 impl MyWindowHandler {
     pub fn new() -> Result<Self, Box<dyn Error>> {
-        // Rectangles
-        let rect1 = Rectangle::new(200.0, 200.0, 200.0, point![0.0, 0.0, 1.0]);
-        let rect2 = Rectangle::new(200.0, 200.0, 200.0, point![0.0, 0.0, 500.0]);
-        let rect3 = Rectangle::new(200.0, 200.0, 200.0, point![-300.0, 0.0, 500.0]);
-        let rect4 = Rectangle::new(200.0, 200.0, 200.0, point![-500.0, 0.0, 500.0]);
-        let rect5 = Rectangle::new(200.0, 200.0, 200.0, point![1000.0, 0.0, 500.0]);
-        let rect6 = Rectangle::new(200.0, 200.0, 200.0, point![1400.0, 0.0, 500.0]);
         let mut rects = Vec::new();
 
-        rects.push(rect1);
-        rects.push(rect2);
-        rects.push(rect3);
-        rects.push(rect4);
-        rects.push(rect5);
-        rects.push(rect6);
+        // Rectangles
+        for j in 0..20 {
+            let i = j as f32;
+            let rect1 = Rectangle::new(200.0, 200.0, 200.0, point![0.0, 0.0, i * 100.0]);
+            let rect2 = Rectangle::new(200.0, 200.0, 200.0, point![100.0, 0.0, i * 100.0]);
+            let rect3 = Rectangle::new(200.0, 200.0, 200.0, point![200.0, 0.0, i * 100.0]);
+
+            rects.push(rect1);
+            rects.push(rect2);
+            rects.push(rect3);
+        }
+
 
         // Camera
-        let eye_position = point![0.0, 0.0, 0.0,];
-        let target_position = point![0.0, 0.0, 1.0];
+        let eye_position = point![0.0, 600.0, 0.0,];
+        let target_position = point![0.0, 600.0, 1.0];
         let up_direction = vector![0.0, 1.0, 0.0];
         let camera = Camera::new(eye_position, target_position, up_direction);
         return Ok(MyWindowHandler {
@@ -69,9 +68,9 @@ impl WindowHandler for MyWindowHandler {
         // --------------- Game Updates ------------------ // 
 
         for r in self.rects.iter_mut() {
-            rotate_x(r, 0.01);
-            rotate_y(r, 0.01);
-            rotate_z(r, 0.01);
+            //rotate_x(r, 0.01);
+            //rotate_y(r, 0.01);
+            //rotate_z(r, 0.01);
         }
         
 
