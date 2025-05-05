@@ -6,7 +6,6 @@ pub struct Rectangle {
     // You can also access widthm height and length
     pub w: f32, pub h: f32, pub l: f32,
     pub center: OPoint<f32, Const<3>>,
-    pub degrees: f32,
     pub points: [OPoint<f32, Const<3>>; 8],
 }
 
@@ -18,12 +17,11 @@ impl Rectangle {
         let w: f32 = w;
         let h: f32 = h;
         let l: f32 = l;
-        let degrees: f32 = 0.0;
         let center: OPoint<f32, Const<3>> = point![starting_corner.x + w / 2.0, starting_corner.y + h / 2.0, starting_corner.z + l / 2.0]; 
         let points: [OPoint<f32, Const<3>>; 8] = create_3d_rectangle(w, h, l, starting_corner);
 
         return Rectangle {
-            w, h, l, degrees, center, points,
+            w, h, l, center, points,
         };
     }
 }
