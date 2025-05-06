@@ -3,7 +3,7 @@ use nalgebra::{Const, OPoint, point, Point3};
 
 pub struct Rectangle {
     // A rectangle consists of 8 points
-    // You can also access widthm height and length
+    // You can also access width height and length
     pub w: f32, pub h: f32, pub l: f32,
     pub center: OPoint<f32, Const<3>>,
     pub points: [OPoint<f32, Const<3>>; 8],

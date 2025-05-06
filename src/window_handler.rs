@@ -55,8 +55,8 @@ impl WindowHandler for MyWindowHandler {
             unicode_codepoint: char
         ) {
         match unicode_codepoint {
-            'd' => self.camera.turn_right(0.1),
-            'a' => self.camera.turn_right(-0.1),
+            'd' => self.camera.rotate_around_y(0.1),
+            'a' => self.camera.rotate_around_y(-0.1),
             _ => println!("Not implemented"),
             
         }
@@ -94,6 +94,7 @@ impl WindowHandler for MyWindowHandler {
                 view_matrix
             );
             draw_rectangle(transformed_points, graphics);
+            draw_rectangle_outline(transformed_points, graphics);
         }
 
         helper.request_redraw();

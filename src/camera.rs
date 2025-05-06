@@ -29,11 +29,13 @@ impl Camera {
     }
     // Takes itself
     // Gets the view matrix 
+    // The view matrix is used to calculate drawing positon for other objects
     pub fn get_view_matrix(&self) -> Matrix4<f32> {
         Matrix4::look_at_rh(&self.eye_position, &self.target_position, &self.up_direction)
     }
 
-    pub fn turn_right(&mut self, x: f32) {
+    // Rotates the camera around the y-axis
+    pub fn rotate_around_y(&mut self, x: f32) {
         // Projection matrix for rotating around y-axis
         let proj_y = matrix![
         x.cos(), 0.0, -x.sin();
