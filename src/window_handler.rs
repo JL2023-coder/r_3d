@@ -2,16 +2,16 @@ use speedy2d::window::{WindowHandler, WindowHelper};
 use speedy2d::Graphics2D;
 use speedy2d::color::Color;
 use std::error::Error;
-use std::f32::consts::FRAC_PI_4;
+use std::f32::consts::FRAC_PI_8;
 use nalgebra::{matrix, point, vector, Const, Matrix4, OPoint, Vector3};
 use crate::camera::Camera;
 use crate::shapes::*;
 use crate::transformations::*;
 use crate::drawing::*;
 
-const FOV: f32 = FRAC_PI_4;
-const FAR: f32 = 5000.0;
-const NEAR: f32 = 100.0;
+const FOV: f32 = FRAC_PI_8;
+const FAR: f32 = 20000.0;
+const NEAR: f32 = 0.001;
 
 pub struct MyWindowHandler {
     rects: Vec<Rectangle>,
@@ -24,21 +24,18 @@ impl MyWindowHandler {
         let mut rects = Vec::new();
 
         // Rectangles
-        for j in 0..20 {
-            let i = j as f32;
-            let rect1 = Rectangle::new(200.0, 200.0, 200.0, point![0.0, 0.0, i * 100.0]);
-            let rect2 = Rectangle::new(200.0, 200.0, 200.0, point![100.0, 0.0, i * 100.0]);
-            let rect3 = Rectangle::new(200.0, 200.0, 200.0, point![200.0, 0.0, i * 100.0]);
-
-            rects.push(rect1);
-            rects.push(rect2);
-            rects.push(rect3);
+        // Rectangles z
+        for i in 0..100 {
+            for j in 0..20 {
+                let rect = Rectangle::new(50.0, 50.0, 50.0, point![j as f32  * 25.0, 0.0, i as f32 * 25.0]);
+                rects.push(rect);
+            } 
         }
 
 
         // Camera
-        let eye_position = point![0.0, 600.0, 0.0,];
-        let target_position = point![0.0, 600.0, 1.0];
+        let eye_position = point![0.0, 500.0, 0.0,];
+        let target_position = point![0.0, 500.0, 1.0];
         let up_direction = vector![0.0, 1.0, 0.0];
         let camera = Camera::new(eye_position, target_position, up_direction);
         return Ok(MyWindowHandler {
@@ -49,14 +46,22 @@ impl MyWindowHandler {
 }
 
 impl WindowHandler for MyWindowHandler {
+    // Handles keyboard input
     fn on_keyboard_char(
             &mut self,
             helper: &mut WindowHelper<()>,
             unicode_codepoint: char
         ) {
         match unicode_codepoint {
-            'd' => self.camera.rotate_around_y(0.1),
-            'a' => self.camera.rotate_around_y(-0.1),
+            // Updates camera target direction
+            // The fn takes in degrees to be turned
+            // Higher value, you turn more
+            'd' => self.camera.rotate_around_y(0.05),
+            // On 'a' turn left
+            'a' => self.camera.rotate_around_y(-0.05),
+
+            // Updates camera eye position
+            'w' => self.camera.dolly(0.1),
             _ => println!("Not implemented"),
             
         }
@@ -67,6 +72,7 @@ impl WindowHandler for MyWindowHandler {
 
         // --------------- Game Updates ------------------ // 
 
+        // Remove '//' to make rectangle rotate
         for r in self.rects.iter_mut() {
             //rotate_x(r, 0.01);
             //rotate_y(r, 0.01);

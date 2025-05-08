@@ -1,3 +1,5 @@
+use std::f32::NAN;
+
 use nalgebra::{coordinates::X, Matrix4, matrix, point, Const, OPoint, Point3, Vector3};
 
 use crate::{main, shapes::Rectangle};
@@ -29,9 +31,9 @@ pub fn proj_perspective(rect: &Rectangle,
 ) -> [OPoint<f32, Const<3>>; 8] {
     // Temp Vars
     // Test drawing width
-    let screen_width = 800.0;
+    let screen_width = 1400.0;
     // Test drawing height
-    let screen_height = 600.0;
+    let screen_height = 1100.0;
 
     let proj_perspective_matrix = matrix![
         1.0 / ((fov / 2.0).tan() * asp_ratio), 0.0, 0.0, 0.0;
@@ -54,16 +56,27 @@ pub fn proj_perspective(rect: &Rectangle,
 
         let w = my_p.w;
 
-        let x_ndc = my_p.x / w;
-        let y_ndc = my_p.y / w;
-        let z_ndc = my_p.z / w;
+        // Check if point should be seen/ valid point
+        // A point is valid as long as it is in front of camera/ view_target
+        if w > 0.0 && 
+        my_p.x >= -w && my_p.x <= w && 
+        my_p.y >= -w && my_p.y <= w &&
+        my_p.z >= -w && my_p.z <= w {
 
-        // Final x coord for drawing
-        let x_screen = ((x_ndc + 1.0) / 2.0) * screen_width;
-        // Final y coord for drawing
-        let y_screen = ((1.0 - y_ndc) / 2.0) * screen_height;
+            let x_ndc = my_p.x / w;
+            let y_ndc = my_p.y / w;
+            let z_ndc = my_p.z / w;
 
-        *p = point![x_screen, y_screen, z_ndc];
+            // Final x coord for drawing
+            let x_screen = ((x_ndc + 1.0) / 2.0) * screen_width;
+            // Final y coord for drawing
+            let y_screen = ((1.0 - y_ndc) / 2.0) * screen_height;
+
+            *p = point![x_screen, y_screen, z_ndc];
+        }
+        else {
+            *p = point![NAN, NAN, NAN];
+        }
     }
     points
 }
