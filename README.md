@@ -1,26 +1,35 @@
-Me trying to create a 3d engine, with absolut no clue how:) We learn by doing!
+# someday a 3d engine
 
-## Functionality so far
-- Rendering rectangle in 3d
-- Rotating objects
-- Rendering perspective
-- Move camera forward (not based on target_direction)
-- Turn pov (Rotate camera aroundd y-axis
+## About
 
-## To be implemented
+Me trying to create a 3d engine in Rust, with absolute no clue how:) We learn by doing!
+
+## Features Implemented So Far
+
+* **Basic 3D Rendering:** Renders simple rectangular prisms (cuboids) in a 3D space.
+* **Object Transformation:** Supports rotating individual objects around their local axes.
+* **Perspective Projection:** Renders the scene with a perspective view, creating the illusion of depth.
+* **Basic Camera Movement:** Allows moving the camera forward along a fixed direction.
+* **Camera Point-of-View Control:** Enables rotating the camera's view around the vertical (y) axis (turning left/right).
+
+## Planned Features (To Be Implemented)
+
 ### Camera
-- Move camera forward towards eye target
-- Can move all directions
-- Other povs?
-### Other shapes
-- Triangles
-- General objects
-### Interact with world
-- Collition
-- Remove add objects in game
-### Possible games
-- Simple minecraft clone
-- Basic FPS
-### 3D simulation
-- Rotation
-- Perspective
+* Implement camera movement relative to its viewing direction (moving forward towards the target direction).
+* Enable full 6-degree-of-freedom camera movement (forward/backward, strafe left/right, up/down).
+* Explore and implement different camera perspectives or modes (e.g., third-person, top-down).
+* Implement a type of light projection, like shadow mapping.
+
+### Object Representation
+* Add support for rendering other shapes(rectangles, circles).
+* Ability to render general 3D objects.
+
+### World Interaction
+* Simple **collision** system.
+* Player gravity.
+* Ability to add and remove objects in runtime.
+* Moving objects based on player input during runtime(example: moving with **collision**).
+
+### Future Possibilities
+* Use the engine to create simple games(basic minecraft clone, FPS shooter).
+* Visualize 3D rotations, projections and shadow mapping.
