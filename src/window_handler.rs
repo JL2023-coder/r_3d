@@ -61,7 +61,7 @@ impl WindowHandler for MyWindowHandler {
             'a' => self.camera.rotate_around_y(-0.05),
 
             // Updates camera eye position
-            'w' => self.camera.dolly(0.1),
+            'w' => self.camera.dolly(10.0),
             _ => println!("Not implemented"),
             
         }

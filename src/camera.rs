@@ -1,4 +1,4 @@
-use nalgebra::{matrix, Const, Matrix4, OPoint, Vector3};
+use nalgebra::{matrix, vector, Const, Matrix4, OPoint, Vector3};
 use speedy2d::dimen::Vector2;
 
 
@@ -58,9 +58,10 @@ impl Camera {
     // Moves camera eye postion
     // Positive moves forward, negative value backwards
     pub fn dolly(&mut self, distance: f32) {
-        let target_postion_normalized = &self.target_position.coords.normalize();
-        self.eye_position += Vector3::new(0.0, 0.0, 1.0) * distance;
-
+        let new_eye_pos = self.eye_position.coords + vector![0.0, 0.0, distance];
+        let new_target_pos = self.target_position + vector![0.0, 0.0, distance];
+        self.eye_position = OPoint::from(new_eye_pos);
+        self.target_position = OPoint::from(new_target_pos);
     }
 }
 
