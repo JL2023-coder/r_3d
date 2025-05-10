@@ -21,7 +21,7 @@ Me trying to create a 3d engine in Rust, with absolute no clue how:) We learn by
 * Implement a type of light projection, like shadow mapping.
 
 ### Object Representation
-* Add support for rendering other shapes(rectangles, circles).
+* Add support for rendering other shapes(triangles, circles).
 * Ability to render general 3D objects.
 
 ### World Interaction
