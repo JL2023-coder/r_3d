@@ -31,9 +31,9 @@ pub fn proj_perspective(rect: &Rectangle,
 ) -> [OPoint<f32, Const<3>>; 8] {
     // Temp Vars
     // Test drawing width
-    let screen_width = 1400.0;
+    let screen_width = 1900.0;
     // Test drawing height
-    let screen_height = 1100.0;
+    let screen_height = 1300.0;
 
     let proj_perspective_matrix = matrix![
         1.0 / ((fov / 2.0).tan() * asp_ratio), 0.0, 0.0, 0.0;

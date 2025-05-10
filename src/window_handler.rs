@@ -2,14 +2,14 @@ use speedy2d::window::{WindowHandler, WindowHelper};
 use speedy2d::Graphics2D;
 use speedy2d::color::Color;
 use std::error::Error;
-use std::f32::consts::FRAC_PI_8;
+use std::f32::consts::{FRAC_PI_4, FRAC_PI_8};
 use nalgebra::{matrix, point, vector, Const, Matrix4, OPoint, Vector3};
 use crate::camera::Camera;
 use crate::shapes::*;
 use crate::transformations::*;
 use crate::drawing::*;
 
-const FOV: f32 = FRAC_PI_8;
+const FOV: f32 = FRAC_PI_4;
 const FAR: f32 = 20000.0;
 const NEAR: f32 = 0.001;
 
@@ -34,8 +34,8 @@ impl MyWindowHandler {
 
 
         // Camera
-        let eye_position = point![0.0, 500.0, 0.0,];
-        let target_position = point![0.0, 500.0, 1.0];
+        let eye_position = point![0.0, 125.0, 0.0,];
+        let target_position = point![0.0, 125.0, 1.0];
         let up_direction = vector![0.0, 1.0, 0.0];
         let camera = Camera::new(eye_position, target_position, up_direction);
         return Ok(MyWindowHandler {
@@ -99,7 +99,7 @@ impl WindowHandler for MyWindowHandler {
                 model_matrix,
                 view_matrix
             );
-            draw_rectangle(transformed_points, graphics);
+            draw_rectangle_face(transformed_points, graphics);
             draw_rectangle_outline(transformed_points, graphics);
         }
 
