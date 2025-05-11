@@ -14,10 +14,10 @@ const CUBE_EDGES_4: [(usize, usize); 12] = [
 const CUBE_EDGES_6: [(usize, usize, usize, usize); 6] = [
     (0, 1, 2, 3), // Down face
     (4, 5, 6, 7), // Up face
-    (0, 1, 4, 7), // Front face
-    (2, 3, 6, 5), // Back face
-    (1, 2, 5, 4), // Right face
-    (0, 3, 6, 7), // Left edges
+    (0, 1, 5, 4), // Front face
+    (2, 3, 7, 6), // Back face
+    (1, 2, 6, 5), // Right face
+    (0, 3, 7, 4), // Left edges
 ];
 // Draws lines to rectangle, does not take in a rectangle but instead 8 points
 // For now the calculation of where points should be in screen happenes outside of draw method
@@ -50,7 +50,7 @@ pub fn draw_rectangle_outline(points: [OPoint<f32, Const<3>>; 8], g: &mut Graphi
 
 // Draws one face of the rectangle
 pub fn draw_rectangle_face(points: [OPoint<f32, Const<3>>; 8], g: &mut Graphics2D) {
-    let (p1, p2, p3, p4) = CUBE_EDGES_6[0];
+    let (p1, p2, p3, p4) = CUBE_EDGES_6[5];
 
     let vertices = [
         Vector2::new(points[p1].x, points[p1].y),

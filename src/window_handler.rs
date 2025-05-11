@@ -25,13 +25,15 @@ impl MyWindowHandler {
 
         // Rectangles
         // Rectangles z
-        for i in 0..100 {
+        /* for i in 0..100 {
             for j in 0..20 {
                 let rect = Rectangle::new(50.0, 50.0, 50.0, point![j as f32  * 25.0, 0.0, i as f32 * 25.0]);
                 rects.push(rect);
             } 
-        }
+        } */
 
+        let rect = Rectangle::new(200.0, 200.0, 200.0, point![0.0, 0.0, 400.0]);
+        rects.push(rect);
 
         // Camera
         let eye_position = point![0.0, 125.0, 0.0,];
@@ -74,7 +76,7 @@ impl WindowHandler for MyWindowHandler {
 
         // Remove '//' to make rectangle rotate
         for r in self.rects.iter_mut() {
-            //rotate_x(r, 0.01);
+            rotate_x(r, 0.01);
             //rotate_y(r, 0.01);
             //rotate_z(r, 0.01);
         }
